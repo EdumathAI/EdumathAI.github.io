@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMathAI-Solutions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header img {
+            max-height: 50px;
+            margin-right: 20px;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 0.5em;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 1em;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            background-color: #4CAF50;
+        }
+
+        main {
+            padding: 2em;
+            display: none;
+        }
+
+        main.active {
+            display: block;
+        }
+
+        h2 {
+            color: #4CAF50;
+        }
+
+        .activity {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 1em;
+            margin-bottom: 1em;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .activity img {
+            max-width: 100px;
+            margin-right: 1em;
+        }
+
+        form {
+            background-color: white;
+            padding: 1em;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="file"] {
+            padding: 0.2em;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 0.5em 0;
+            position: relative;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .cart {
+            background-color: #fff;
+            padding: 1em;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 1em;
+        }
+
+        .background {
+            background-image: url('background-image.jpg');
+            /* Add a suitable background image */
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            padding: 2em;
+        }
+
+        .intro {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .intro h1 {
+            font-size: 2.5em;
+            color: #333;
+        }
+
+        .intro p {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .activities {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .activity-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 1em;
+            padding: 1.5em;
+            flex: 1 1 calc(33% - 2em);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .activity-card img {
+            max-width: 100px;
+            margin-bottom: 1em;
+        }
+
+        .activity-card h3 {
+            color: #4CAF50;
+            margin-bottom: 0.5em;
+        }
+
+        .activity-card p {
+            color: #666;
+        }
+
+        .resource-item {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 1em;
+            padding: 1.5em;
+            text-align: center;
+        }
+
+        .resource-item img {
+            max-width: 100px;
+            margin-bottom: 1em;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container {
+            background: white;
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5em;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a img {
+            margin-right: 0.5em;
+            height: 20px;
+        }
+
+        .rotating-banner {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="logo.jpg" alt="EduMathAI Solutions Logo">
+        <h1>EduMathAI Solutions</h1>
+    </header>
+    <nav>
+        <a href="#accueil" class="nav-link" data-target="accueil">Accueil</a>
+        <a href="#qui-sommes-nous" class="nav-link" data-target="qui-sommes-nous">Qui sommes-nous?</a>
+        <a href="#services-educatifs" class="nav-link" data-target="services-educatifs">Services Éducatifs et Soutien Scolaire</a>
+        <a href="#services-professionnels" class="nav-link" data-target="services-professionnels">Services Professionnels et Formations</a>
+        <a href="#contact" class="nav-link" data-target="contact">Contact</a>
+    </nav>
+    <div class="rotating-banner" id="rotating-banner"></div>
+    <main id="accueil" class="active background">
+        <div class="intro">
+            <h1>Bienvenue sur le site de EduMathAI Solutions.</h1>
+            <p>Nous proposons une variété de services éducatifs et professionnels pour vous aider à atteindre vos objectifs académiques et professionnels.</p>
+        </div>
+        <div class="activities">
+            <div class="activity-card" data-target="services-educatifs">
+                <h3>Cours en ligne</h3>
+                <p>Depuis chez vous, confortablement installé sur votre canapé, nos experts sont prêts à vous dispenser des cours en ligne. Nous offrons des cours personnalisés pour tous les niveaux et dans diverses matières, adaptés à vos besoins spécifiques.</p>
+            </div>
+            <div class="activity-card" data-target="services-educatifs">
+                <h3>Correction de devoirs</h3>
+                <p>Obtenez la correction de vos devoirs par nos experts dans différentes matières.</p>
+            </div>
+            <div class="activity-card" data-target="services-educatifs">
+                <h3>Tutoriel en ligne</h3>
+                <p>Accédez à des tutoriels détaillés et de qualité en ligne pour mieux comprendre vos cours.</p>
+            </div>
+            <div class="activity-card" data-target="services-professionnels">
+                <h3>Consulting en mathématiques</h3>
+                <p>Recevez des conseils professionnels en mathématiques pour votre entreprise.</p>
+            </div>
+            <div class="activity-card" data-target="services-professionnels">
+                <h3>Consulting en IA</h3>
+                <p>Optimisez l'utilisation de l'IA dans votre établissement scolaire.</p>
+            </div>
+            <div class="activity-card" data-target="services-professionnels">
+                <h3>Conférences sur l'IA</h3>
+                <p>Pour aider les enseignants à surmonter les défis liés à l'enseignement, nous offrons des formations spécialisées pour les enseignants et les responsables pédagogiques sur l'utilisation de l'IA dans le domaine scolaire. Nos experts sont prêts à vous accompagner pour intégrer efficacement les technologies d'IA dans vos pratiques éducatives, afin d'améliorer l'expérience d'apprentissage et les résultats des élèves.</p>
+            </div>
+        </div>
+    </main>
+    <main id="qui-sommes-nous">
+        <h2>Qui sommes-nous?</h2>
+        <p>EduMathIA Solutions est une autoentreprise spécialisée dans les cours particuliers en ligne, l'aide aux devoirs et le consulting en entreprise dans les domaines des mathématiques et de l'IA en éducation.</p>
+        <p>Notre objectif est de vous donner des cours de mathématiques et de sciences afin de :</p>
+        <ul>
+            <li>vous remettre à niveau si vous rencontrez des difficultés ;</li>
+            <li>vous permettre d'approfondir vos connaissances en mathématiques et sciences ;</li>
+            <li>vous préparer au brevet du collège, au baccalauréat et à l'entrée en classe préparatoire ;</li>
+            <li>vous aider (les entreprises) à améliorer et à optimiser vos problèmes en mathématiques et sciences.</li>
+        </ul>
+        <p>Fonctions actuelles du responsable :</p>
+        <ul>
+            <li>Enseignant permanent à l'institut d'ingénieurs en informatique de Limoges (3iL) au campus de Rodez</li>
+            <li>L'école des mines d'Albi (vacataire)</li>
+        </ul>
+        <p>et j'enseigne les niveaux suivants :</p>
+        <ul>
+            <li>1ère et 2ème année ingénieur</li>
+            <li>Licence 3 IMT</li>
+        </ul>
+        <h3>Expérience professionnelle du responsable</h3>
+        <ul>
+            <li>Depuis-2021 : Enseignant permanent à 3iL-Ingénieurs.</li>
+            <li>2021-2022 : INU Champollion et l'école des mines d'Albi - Enseignant vacataire en mathématiques : Enseignement de mathématiques et modélisation en Licence 3 mathématiques.</li>
+            <li>2020-2021 : INU Champollion d'Albi (janvier-juin) - Enseignant vacataire en mathématiques : Enseignement de mathématiques et modélisation en Licence 3 mathématiques.</li>
+            <li>2020-2021 : Ecole des mines d'Albi (septembre-janvier) - Enseignant vacataire en mathématiques : Enseignement de mathématiques en Licence 3 IMT.</li>
+            <li>2020-2021 : Lycée la Roque - Professeur vacataire en mathématiques : Enseignement de mathématiques en BTS 2 ANABIOTEC.</li>
+            <li>2020-2021 : Chambre de métiers et de l'artisanat de l'Aveyron - Professeur de mathématiques et sciences : Enseignement de mathématiques et sciences en CAP et BP.</li>
+            <li>2019-2020 : Cours particuliers de mathématiques en licence 2.</li>
+            <li>2019-2020 : LYCEE LOUIS RASCOL - Professeur de mathématiques : Enseignement de mathématiques en Terminale S. Enseignement de mathématiques en 1ère spécialité Mathématiques. Enseignement des mathématiques en BTS 1.</li>
+            <li>2016-2019 : MONTANUNIVERSITAET LEOBEN - Chercheur assistant : Analyse numérique des EDP stochastiques. Simulation numérique des EDP stochastiques. Simulation du filtre de Kalman. Simulation du filtrage non linéaire avec un bruit de Lévy.</li>
+            <li>2016 : INRIA-BORDEAUX (Institut National de Recherche en Informatique et en Automatique) - Stage Master 2 : Etude de la méthode de factorisation des EDPs. Application de la méthode de factorisation au problème inverse de l’ECG. Simulation numérique des résultats avec Matlab.</li>
+            <li>2014-2015 : AFEV Nantes - Bénévole : Suivi de 2 étudiants de L1 en mathématiques et informatique.</li>
+            <li>2012-2013 : LYCEE SAVORGNAN DE BRAZZA - Stage en situation, terminale C. Enseignement de mathématiques en Terminale C.</li>
+        </ul>
+
+        <h3>Formations</h3>
+        <ul>
+            <li>2023-2026 : Doctorat en didactique des mathématiques (Canada).</li>
+            <li>2016-2019 : Doctorat en mathématiques à l'université de Leoben (Autriche).</li>
+            <li>2014-2016 : Master en ingénierie mathématiquesà l'université de Nantes (France).</li>
+            <li>2013-2014 : Master 2 en mathématiques AIMS-Cameroon, Limbé (Cameroun).</li>
+            <li>2008-2013 : Master en enseignement des mathématiques à l'ENS de Brazzaville, Congo-Brazza.</li>
+        </ul>
+    </main>
+    <main id="services-educatifs">
+        <h2>Services Éducatifs et Soutien Scolaire</h2>
+        <section id="service-selection">
+            <label for="service-select">Sélectionnez un service :</label>
+            <select id="service-select" onchange="displayServiceForm()">
+                <option value="" disabled selected>Choisissez un service</option>
+                <option value="question-devoir">Soumettre une Question ou un Devoir</option>
+                <option value="cours-en-ligne">Cours en ligne</option>
+                <option value="tutoriel-en-ligne">Tutoriel en ligne</option>
+                <option value="cours-3il">Cours 3iL</option>
+            </select>
+        </section>
+        <section id="question-devoir" class="service-form" style="display:none;">
+            <h3>Soumettre une Question ou un Devoir</h3>
+            <form id="question-form">
+                <label for="student-name">Nom et prénom :</label>
+                <input type="text" id="student-name" name="student-name" required>
+
+                <label for="student-email">Email :</label>
+                <input type="email" id="student-email" name="student-email" required>
+
+                <label for="student-subject">Matières :</label>
+                <select id="student-subject" name="student-subject" required>
+                    <option value="mathématiques">Mathématiques</option>
+                    <option value="physique-chimie">Physique-Chimie</option>
+                    <option value="biologie">Biologie</option>
+                    <option value="anglais">Anglais</option>
+                </select>
+             
+                <p>Prix : <span id="tutorial-price">15</span> euros</p>
+
+                <label for="student-question">Question ou devoir (texte) :</label>
+                <textarea id="student-question" name="student-question" required></textarea>
+
+                <label for="student-video">Télécharger une vidéo :</label>
+                <input type="file" id="student-video" name="student-video" accept="video/*">
+
+                <label for="student-pdf">Télécharger un fichier PDF :</label>
+                <input type="file" id="student-pdf" name="student-pdf" accept=".pdf">
+
+                <button type="submit" onclick="return paypalPayment(15)">Payer via PayPal</button>
+            </form>
+        </section>
+        <section id="cours-en-ligne" class="service-form" style="display:none;">
+            <h3>Cours en ligne</h3>
+            <form id="courses-form">
+                <label for="course-name">Nom et prénom :</label>
+                <input type="text" id="course-name" name="course-name" required>
+
+                <label for="course-email">Email :</label>
+                <input type="email" id="course-email" name="course-email" required>
+
+                <label for="course-level">Niveaux :</label>
+                <select id="course-level" name="course-level" required onchange="calculateCoursePrice('course-level', 'course-price')">
+                    <option value="6è">6è</option>
+                    <option value="5è">5è</option>
+                    <option value="4è">4è</option>
+                    <option value="3è">3è</option>
+                    <option value="2nde">2nde</option>
+                    <option value="1ère">1ère</option>
+                    <option value="Terminale">Terminale</option>
+                    <option value="Licence 1">Licence 1</option>
+                    <option value="Licence 2">Licence 2</option>
+                    <option value="Licence 3">Licence 3</option>
+                </select>
+
+                <p>Prix : <span id="course-price">0</span> euros/h</p>
+
+                <label for="course-subject">Matières :</label>
+                <select id="course-subject" name="course-subject" required>
+                    <option value="mathématiques">Mathématiques</option>
+                    <option value="physique-chimie">Physique-Chimie</option>
+                    <option value="biologie">Biologie</option>
+                    <option value="anglais">Anglais</option>
+                </select>
+
+                <label for="course-time-slot">Créneaux :</label>
+                <select id="course-time-slot" name="course-time-slot" required>
+                    <option value="" disabled selected>Choisissez un créneau</option>
+                    <!-- Time slots will be populated by JavaScript -->
+                </select>
+                <button type="button" onclick="confirmTimeSlot('course-time-slot')">Confirmer</button>
+
+                <button type="submit" onclick="return paypalPayment(getCoursePrice('course-level'))">Payer via PayPal</button>
+            </form>
+        </section>
+        <section id="tutoriel-en-ligne" class="service-form" style="display:none;">
+            <h3>EduMathAI-Solutions</h3>
+            <form id="tutorials-form">
+                <label for="tutorial-name">Nom et prénom :</label>
+                <input type="text" id="tutorial-name" name="tutorial-name" required>
+
+                <label for="tutorial-email">Email :</label>
+                <input type="email" id="tutorial-email" name="tutorial-email" required>
+
+                <label for="tutorial-level">Niveaux :</label>
+                <select id="tutorial-level" name="tutorial-level" required onchange="calculateCoursePrice('tutorial-level', 'tutorial-price')">
+                    <option value="6è">6è</option>
+                    <option value="5è">5è</option>
+                    <option value="4è">4è</option>
+                    <option value="3è">3è</option>
+                    <option value="2nde">2nde</option>
+                    <option value="1ère">1ère</option>
+                    <option value="Terminale">Terminale</option>
+                    <option value="Licence 1">Licence 1</option>
+                    <option value="Licence 2">Licence 2</option>
+                    <option value="Licence 3">Licence 3</option>
+                </select>
+
+                <p>Prix : <span id="tutorial-price">0</span> euros/h</p>
+
+                <label for="tutorial-subject">Matières :</label>
+                <select id="tutorial-subject" name="tutorial-subject" required>
+                    <option value="mathématiques">Mathématiques</option>
+                    <option value="physique-chimie">Physique-Chimie</option>
+                    <option value="biologie">Biologie</option>
+                    <option value="anglais">Anglais</option>
+                </select>
+
+                <label for="tutorial-time-slot">Créneaux :</label>
+                <select id="tutorial-time-slot" name="tutorial-time-slot" required>
+                    <option value="" disabled selected>Choisissez un créneau</option>
+                    <!-- Time slots will be populated by JavaScript -->
+                </select>
+                <button type="button" onclick="confirmTimeSlot('tutorial-time-slot')">Confirmer</button>
+
+                <button type="submit" onclick="return paypalPayment(getCoursePrice('tutorial-level'))">Payer via PayPal</button>
+            </form>
+        </section>
+        <section id="cours-3il" class="service-form" style="display:none;">
+            <h3>Cours 3iL</h3>
+            <form id="cours-3il-form">
+                <label for="cours-3il-select">Sélectionnez un cours :</label>
+                <select id="cours-3il-select" onchange="displayCours3iLContent()">
+                    <option value="" disabled selected>Choisissez un cours</option>
+                    <option value="mas">MAS</option>
+                    <option value="an">AN</option>
+                    <option value="fn">FN</option>
+                    <option value="maths">MATHS</option>
+                    <option value="ads">AdS</option>
+                </select>
+            </form>
+            <div id="cours-3il-content" style="display:none;">
+                <h4>Contenu du cours</h4>
+                <div id="mas-content" class="course-content" style="display:none;">
+                    <h5>MAS</h5>
+                    <p>Support de cours :</p>
+                    <ul>
+                        <li><a href="support/mas/lecture1.pdf" target="_blank">Lecture 1 PDF</a></li>
+                        <li><a href="support/mas/lecture2.pdf" target="_blank">Lecture 2 PDF</a></li>
+                        <li><a href="support/mas/video1.mp4" target="_blank">Vidéo 1</a></li>
+                        <li><a href="support/mas/video2.mp4" target="_blank">Vidéo 2</a></li>
+                    </ul>
+                </div>
+                <div id="an-content" class="course-content" style="display:none;">
+                    <h5>AN</h5>
+                    <p>Support de cours :</p>
+                    <ul>
+                        <li><a href="support/an/lecture1.pdf" target="_blank">Lecture 1 PDF</a></li>
+                        <li><a href="support/an/lecture2.pdf" target="_blank">Lecture 2 PDF</a></li>
+                        <li><a href="support/an/video1.mp4" target="_blank">Vidéo 1</a></li>
+                        <li><a href="support/an/video2.mp4" target="_blank">Vidéo 2</a></li>
+                    </ul>
+                </div>
+                <div id="fn-content" class="course-content" style="display:none;">
+                    <h5>FN</h5>
+                    <p>Support de cours :</p>
+                    <ul>
+                        <li><a href="support/fn/lecture1.pdf" target="_blank">Lecture 1 PDF</a></li>
+                        <li><a href="support/fn/lecture2.pdf" target="_blank">Lecture 2 PDF</a></li>
+                        <li><a href="support/fn/video1.mp4" target="_blank">Vidéo 1</a></li>
+                        <li><a href="support/fn/video2.mp4" target="_blank">Vidéo 2</a></li>
+                    </ul>
+                </div>
+                <div id="maths-content" class="course-content" style="display:none;">
+                    <h5>MATHS</h5>
+                    <p>Support de cours :</p>
+                    <ul>
+                        <li><a href="support/maths/lecture1.pdf" target="_blank">Lecture 1 PDF</a></li>
+                        <li><a href="support/maths/lecture2.pdf" target="_blank">Lecture 2 PDF</a></li>
+                        <li><a href="support/maths/video1.mp4" target="_blank">Vidéo 1</a></li>
+                        <li><a href="support/maths/video2.mp4" target="_blank">Vidéo 2</a></li>
+                    </ul>
+                </div>
+                <div id="ads-content" class="course-content" style="display:none;">
+                    <h5>AdS</h5>
+                    <p>Support de cours :</p>
+                    <ul>
+                        <li><a href="support/ads/lecture1.pdf" target="_blank">Lecture 1 PDF</a></li>
+                        <li><a href="support/ads/lecture2.pdf" target="_blank">Lecture 2 PDF</a></li>
+                        <li><a href="support/ads/video1.mp4" target="_blank">Vidéo 1</a></li>
+                        <li><a href="support/ads/video2.mp4" target="_blank">Vidéo 2</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    <main id="services-professionnels">
+        <h2>Services Professionnels et Formations</h2>
+        <section id="professional-service-selection">
+            <label for="professional-service-select">Sélectionnez un service :</label>
+            <select id="professional-service-select" onchange="displayProfessionalServiceForm()">
+                <option value="" disabled selected>Choisissez un service</option>
+                <option value="consulting-mathematiques">Consulting en mathématiques</option>
+                <option value="consulting-ia">Consulting en IA</option>
+                <option value="conference-ia">Conférence sur l'IA</option>
+            </select>
+        </section>
+        <section id="consulting-mathematiques" class="professional-service-form" style="display:none;">
+            <h3>Consulting en mathématiques</h3>
+            <form id="consulting-math-form">
+                <label for="school-name">Nom de l'établissement scolaire :</label>
+                <input type="text" id="school-name" name="school-name" required>
+
+                <label for="consulting-hours">Nombre d'heures :</label>
+                <input type="number" id="consulting-hours" name="consulting-hours" required>
+                <p>Prix : 75 euros x <span id="consulting-mathematiques-price">0</span> = <span id="consulting-mathematiques-total">0</span> euros</p>
+
+                <button type="submit" onclick="return paypalPayment(getConsultingPrice('consulting-mathematiques-total'))">Payer via PayPal</button>
+            </form>
+        </section>
+        <section id="consulting-ia" class="professional-service-form" style="display:none;">
+            <h3>Consulting en IA</h3>
+            <form id="consulting-ia-form">
+                <label for="school-name">Nom de l'établissement scolaire :</label>
+                <input type="text" id="school-name" name="school-name" required>
+
+                <label for="consulting-ia-hours">Nombre d'heures :</label>
+                <input type="number" id="consulting-ia-hours" name="consulting-ia-hours" required>
+                <p>Prix : 100 euros x <span id="consulting-ia-price">0</span> = <span id="consulting-ia-total">0</span> euros</p>
+
+                <button type="submit" onclick="return paypalPayment(getConsultingPrice('consulting-ia-total'))">Payer via PayPal</button>
+            </form>
+        </section>
+        <section id="conference-ia" class="professional-service-form" style="display:none;">
+            <h3>Conférence sur l'IA</h3>
+            <form id="conference-form">
+                <label for="school-name">Nom de l'établissement scolaire :</label>
+                <input type="text" id="school-name" name="school-name" required>
+
+                <p>Prix : 700 euros</p>
+
+                <label for="distance">Déplacement (km) :</label>
+                <input type="number" id="distance" name="distance" required>
+                <p>Montant total : 700 euros + (0,636 euros x <span id="distance-km">0</span> km) = <span id="conference-total-price"></span> euros </p>
+
+                <button type="submit" onclick="return paypalPayment(getConferencePrice())">Payer via PayPal</button>
+            </form>
+        </section>
+    </main>
+    
+    <main id="contact">
+    <h2>Contact</h2>
+    <form id="contact-form" action="send_mail.php" method="post">
+        <label for="contact-email">Adresse mail :</label>
+        <input type="email" id="contact-email" name="contact-email" required>
+
+        <label for="contact-subject">Sujet :</label>
+        <input type="text" id="contact-subject" name="contact-subject" required>
+
+        <label for="contact-message">Message :</label>
+        <textarea id="contact-message" name="contact-message" required></textarea>
+
+        <button type="submit">Envoyer</button>
+    </form>
+</main>
+    
+    <footer>
+        <div class="footer-links">
+            <a href="https://zoom.us/fr/join/" target="_blank"><img src="logo_z.png" alt="Zoom Logo">Zoom</a>
+            <a href="https://meet.google.com/landing?pli=1/" target="_blank"><img src="meet.png" alt="Google Meet Logo">Google</a>
+            <a href="https://www.facebook.com/profile.php?id=61563219782755/" target="_blank"><img src="logo_F.jpg" alt="Facebook Logo">Facebook</a>
+            <a href="https://x.com/academie_ronald/" target="_blank"><img src="logo_X.png" alt="Twitter Logo">Twitter</a>
+        </div>
+        <p>&copy; 2024 par EduMathAI Solutions. Tél : 07 60 25 55 62 / ronald.academie@gmail.com</p>
+    </footer>
+    <script>
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                document.querySelectorAll('main').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(this.getAttribute('data-target')).classList.add('active');
+            });
+        });
+
+        document.querySelectorAll('.activity-card').forEach(card => {
+            card.addEventListener('click', function () {
+                document.querySelectorAll('main').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(this.getAttribute('data-target')).classList.add('active');
+            });
+        });
+
+        function displayServiceForm() {
+            const serviceSelect = document.getElementById('service-select');
+            const selectedService = serviceSelect.value;
+            document.querySelectorAll('.service-form').forEach(form => {
+                form.style.display = 'none';
+            });
+            if (selectedService) {
+                document.getElementById(selectedService).style.display = 'block';
+            }
+        }
+
+        function displayProfessionalServiceForm() {
+            const serviceSelect = document.getElementById('professional-service-select');
+            const selectedService = serviceSelect.value;
+            document.querySelectorAll('.professional-service-form').forEach(form => {
+                form.style.display = 'none';
+            });
+            if (selectedService) {
+                document.getElementById(selectedService).style.display = 'block';
+            }
+        }
+
+        function displayAccountForm() {
+            const accountType = document.getElementById('account-type').value;
+            document.querySelectorAll('.account-form').forEach(form => {
+                form.style.display = 'none';
+            });
+            if (accountType) {
+                document.getElementById(accountType + '-form').style.display = 'block';
+            }
+        }
+
+        function paypalPayment(amount) {
+            const url = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mronald.reagan@gmail.com&currency_code=EUR&amount=${amount}`;
+            window.location.href = url;
+            return false;
+        }
+
+        function confirmTimeSlot(slotId) {
+            const timeSlot = document.getElementById(slotId).value;
+            if (!timeSlot) {
+                alert('Veuillez choisir un créneau horaire.');
+                return false;
+            }
+            alert('Créneau confirmé : ' + timeSlot);
+            return false;
+        }
+
+        function calculateCoursePrice(levelId, priceId) {
+            const level = document.getElementById(levelId).value;
+            let price = 0;
+            if (['6è', '5è', '4è', '3è'].includes(level)) {
+                price = 20;
+            } else if (['2nde', '1ère', 'Terminale'].includes(level)) {
+                price = 25;
+            } else {
+                price = 35;
+            }
+            document.getElementById(priceId).textContent = price;
+        }
+
+        function getCoursePrice(levelId) {
+            const level = document.getElementById(levelId).value;
+            let price = 0;
+            if (['6è', '5è', '4è', '3è'].includes(level)) {
+                price = 20;
+            } else if (['2nde', '1ère', 'Terminale'].includes(level)) {
+                price = 25;
+            } else {
+                price = 35;
+            }
+            return price;
+        }
+
+        function calculateConsultingPrice(hoursId, rate, totalId) {
+            const hours = document.getElementById(hoursId).value;
+            const total = hours * rate;
+            document.getElementById(totalId).textContent = total;
+        }
+
+        function getConsultingPrice(totalId) {
+            return document.getElementById(totalId).textContent;
+        }
+
+        function populateTimeSlots() {
+            const timeSlotSelects = document.querySelectorAll('#course-time-slot, #tutorial-time-slot');
+            const timeSlots = [
+                'Lundi 19h-20h', 'Lundi 20h-21h', 'Lundi 21h-22h', 'Lundi 22h-23h',
+                'Mardi 19h-20h', 'Mardi 20h-21h', 'Mardi 21h-22h', 'Mardi 22h-23h',
+                'Mercredi 19h-20h', 'Mercredi 20h-21h', 'Mercredi 21h-22h', 'Mercredi 22h-23h',
+                'Jeudi 19h-20h', 'Jeudi 20h-21h', 'Jeudi 21h-22h', 'Jeudi 22h-23h',
+                'Vendredi 19h-20h', 'Vendredi 20h-21h', 'Vendredi 21h-22h', 'Vendredi 22h-23h',
+                'Samedi 10h-11h', 'Samedi 11h-12h', 'Samedi 12h-13h', 'Samedi 13h-14h',
+                'Samedi 14h-15h', 'Samedi 15h-16h', 'Samedi 16h-17h', 'Samedi 17h-18h',
+                'Samedi 18h-19h', 'Samedi 19h-20h', 'Samedi 20h-21h', 'Samedi 21h-22h'
+            ];
+
+            timeSlotSelects.forEach(select => {
+                timeSlots.forEach(slot => {
+                    const option = document.createElement('option');
+                    option.value = slot;
+                    option.textContent = slot;
+                    select.appendChild(option);
+                });
+            });
+        }
+
+        populateTimeSlots();
+
+        document.getElementById('consulting-hours').addEventListener('input', function () {
+            const total = this.value * 75;
+            document.getElementById('consulting-mathematiques-price').textContent = this.value;
+            document.getElementById('consulting-mathematiques-total').textContent = total;
+        });
+
+        document.getElementById('consulting-ia-hours').addEventListener('input', function () {
+            const total = this.value * 100;
+            document.getElementById('consulting-ia-price').textContent = this.value;
+            document.getElementById('consulting-ia-total').textContent = total;
+        });
+
+        document.getElementById('distance').addEventListener('input', function () {
+            calculateConferencePrice();
+        });
+
+        function calculateConferencePrice() {
+            const distance = document.getElementById('distance').value;
+            const totalPrice = 700 + (distance * 0.636);
+            document.getElementById('conference-total-price').textContent = totalPrice.toFixed(2);
+        }
+
+        function displayCours3iLContent() {
+            const selectedCourse = document.getElementById('cours-3il-select').value;
+            document.querySelectorAll('.course-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            if (selectedCourse) {
+                document.getElementById(selectedCourse + '-content').style.display = 'block';
+                document.getElementById('cours-3il-content').style.display = 'block';
+            }
+        }
+
+        function registerTeacher() {
+            const registerForm = document.getElementById('register-form');
+            if (registerForm.checkValidity()) {
+                alert('Inscription réussie ! Vous allez être redirigé vers la page de connexion.');
+                document.querySelectorAll('main').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById('connexion').classList.add('active');
+                return false; // Prevent form submission for demonstration
+            }
+        }
+
+        const rotatingBanner = document.getElementById('rotating-banner');
+        const activities = [
+            "Cours en ligne",
+            "Aide aux devoirs",
+            "Consulting en mathématiques",
+            "Consulting en IA",
+            "Conférences en IA"
+        ];
+        let currentActivityIndex = 0;
+
+        function updateBanner() {
+            rotatingBanner.textContent = activities[currentActivityIndex];
+            currentActivityIndex = (currentActivityIndex + 1) % activities.length;
+        }
+
+        setInterval(updateBanner, 3000);
+        updateBanner(); // Initial call to set the first activity
+    </script>
+</body>
+
+</html>
