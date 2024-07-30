@@ -271,15 +271,16 @@
     <nav>
         <a href="#accueil" class="nav-link" data-target="accueil">Accueil</a>
         <a href="#qui-sommes-nous" class="nav-link" data-target="qui-sommes-nous">Qui sommes-nous?</a>
-        <!--<a href="#services-educatifs" class="nav-link" data-target="services-educatifs">Services Éducatifs et Soutien Scolaire</a>--> 
-       <!--<a href="#services-professionnels" class="nav-link" data-target="services-professionnels">Services Professionnels et Formations</a>-->
-        <!--<a href="#contact" class="nav-link" data-target="contact">Contact</a>-->
+       <!--<a href="#services-educatifs" class="nav-link" data-target="services-educatifs">Services Éducatifs et Soutien Scolaire</a>--> 
+       <!--<a href="#services-professionnels" class="nav-link" data-target="services-professionnels">Services Professionnels et Formations</a>--> 
+       <a href="#connexion" class="nav-link" data-target="connexion">Connexion</a>
     </nav>
     <div class="rotating-banner" id="rotating-banner"></div>
     <main id="accueil" class="active background">
         <div class="intro">
             <h1>Bienvenue sur le site de EduMathAI Solutions.</h1>
             <p>Nous proposons une variété de services éducatifs et professionnels pour vous aider à atteindre vos objectifs académiques et professionnels.</p>
+            <p>Contactez-nous par email ou par téléphone en utilisant les coordonnées fournies en bas de cette page.</p>
         </div>
         <div class="activities">
             <div class="activity-card" data-target="services-educatifs">
@@ -620,6 +621,34 @@
     </form>
 </main>
     
+<main id="connexion">
+    <h2>Connexion</h2>
+    <form id="login-form" onsubmit="return handleLogin(event)">
+        <label for="login-email">Email :</label>
+        <input type="email" id="login-email" name="login-email" required>
+
+        <label for="login-password">Mot de passe :</label>
+        <input type="password" id="login-password" name="login-password" required>
+
+        <button type="submit">Se connecter</button>
+    </form>
+    <p>Pas encore de compte ? <a href="#creer-compte" class="nav-link" data-target="creer-compte">Créer un compte</a></p>
+</main>
+<main id="creer-compte">
+    <h2>Créer un compte</h2>
+    <form id="register-form" onsubmit="return handleRegister(event)">
+        <label for="register-name">Nom :</label>
+        <input type="text" id="register-name" name="register-name" required>
+
+        <label for="register-email">Email :</label>
+        <input type="email" id="register-email" name="register-email" required>
+
+        <label for="register-password">Mot de passe :</label>
+        <input type="password" id="register-password" name="register-password" required>
+
+        <button type="submit">Créer un compte</button>
+    </form>
+</main>
     <footer>
         <div class="footer-links">
             <a href="https://zoom.us/fr/join/" target="_blank"><img src="logo_z.png" alt="Zoom Logo">Zoom</a>
@@ -803,6 +832,41 @@
             }
         }
 
+        function handleRegister(event) {
+            event.preventDefault();
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+
+            if (!validatePassword(password)) {
+                alert('Le mot de passe doit comporter au moins 8 caractères, incluant une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.');
+                return false;
+            }
+
+            // Logic for sending registration data to the server
+            // and handling email confirmation
+            alert('Un email de confirmation vous a été envoyé. Veuillez vérifier votre boîte de réception.');
+        }
+
+        function validatePassword(password) {
+            const minLength = 8;
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasNumbers = /[0-9]/.test(password);
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            return password.length >= minLength && hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChar;
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            // Logic for sending login data to the server
+            // and handling authentication
+            alert('Connexion réussie. Bienvenue!');
+        }
+        
         const rotatingBanner = document.getElementById('rotating-banner');
         const activities = [
             "Cours en ligne",
