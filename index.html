@@ -577,7 +577,7 @@
 
                 <label for="consulting-hours">Nombre d'heures :</label>
                 <input type="number" id="consulting-hours" name="consulting-hours" required>
-                <p>Prix : 75 euros x <span id="consulting-mathematiques-price">0</span> = <span id="consulting-mathematiques-total">0</span> euros</p>
+                <p>Prix : 100 euros x <span id="consulting-mathematiques-price">0</span> = <span id="consulting-mathematiques-total">0</span> euros</p>
 
                 <button type="submit" onclick="return paypalPayment(getConsultingPrice('consulting-mathematiques-total'))">Payer via PayPal</button>
             </form>
@@ -590,7 +590,7 @@
 
                 <label for="consulting-ia-hours">Nombre d'heures :</label>
                 <input type="number" id="consulting-ia-hours" name="consulting-ia-hours" required>
-                <p>Prix : 100 euros x <span id="consulting-ia-price">0</span> = <span id="consulting-ia-total">0</span> euros</p>
+                <p>Prix : 150 euros x <span id="consulting-ia-price">0</span> = <span id="consulting-ia-total">0</span> euros</p>
 
                 <button type="submit" onclick="return paypalPayment(getConsultingPrice('consulting-ia-total'))">Payer via PayPal</button>
             </form>
@@ -601,11 +601,11 @@
                 <label for="school-name">Nom de l'établissement scolaire :</label>
                 <input type="text" id="school-name" name="school-name" required>
 
-                <p>Prix : 700 euros</p>
+                <p>Prix : 1000 euros</p>
 
                 <label for="distance">Déplacement (km) :</label>
                 <input type="number" id="distance" name="distance" required>
-                <p>Montant total : 700 euros + (0,636 euros x <span id="distance-km">0</span> km) = <span id="conference-total-price"></span> euros </p>
+                <p>Montant total : 1000 euros + (0,636 euros x <span id="distance-km">0</span> km) = <span id="conference-total-price"></span> euros </p>
 
                 <button type="submit" onclick="return paypalPayment(getConferencePrice())">Payer via PayPal</button>
             </form>
