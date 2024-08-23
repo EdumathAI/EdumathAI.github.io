@@ -781,13 +781,13 @@
         populateTimeSlots();
 
         document.getElementById('consulting-hours').addEventListener('input', function () {
-            const total = this.value * 75;
+            const total = this.value * 100;
             document.getElementById('consulting-mathematiques-price').textContent = this.value;
             document.getElementById('consulting-mathematiques-total').textContent = total;
         });
 
         document.getElementById('consulting-ia-hours').addEventListener('input', function () {
-            const total = this.value * 100;
+            const total = this.value * 150;
             document.getElementById('consulting-ia-price').textContent = this.value;
             document.getElementById('consulting-ia-total').textContent = total;
         });
@@ -798,7 +798,7 @@
 
         function calculateConferencePrice() {
             const distance = document.getElementById('distance').value;
-            const totalPrice = 700 + (distance * 0.636);
+            const totalPrice = 1000 + (distance * 0.636);
             document.getElementById('conference-total-price').textContent = totalPrice.toFixed(2);
         }
 
